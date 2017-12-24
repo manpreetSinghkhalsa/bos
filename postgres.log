@@ -1,0 +1,75 @@
+2017-11-26 02:04:08.016 IST [6075] LOG:  listening on IPv6 address "::1", port 5432
+2017-11-26 02:04:08.017 IST [6075] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2017-11-26 02:04:08.017 IST [6075] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2017-11-26 02:04:08.042 IST [6076] LOG:  database system was shut down at 2017-11-26 01:59:11 IST
+2017-11-26 02:04:08.052 IST [6075] LOG:  database system is ready to accept connections
+2017-11-26 02:09:52.817 IST [9453] FATAL:  database "shell" does not exist
+2017-11-26 02:12:23.117 IST [10813] FATAL:  database "manpreetsingh" does not exist
+2017-11-26 10:20:32.396 IST [11484] ERROR:  syntax error at or near "createuser" at character 1
+2017-11-26 10:20:32.396 IST [11484] STATEMENT:  createuser admin 
+	GRANT ALL PRIVILEGES ON DATABASE testdb TO admin;
+2017-11-26 10:20:55.344 IST [11484] ERROR:  syntax error at or near "createuser" at character 1
+2017-11-26 10:20:55.344 IST [11484] STATEMENT:  createuser admin 
+	GRANT ALL PRIVILEGES ON DATABASE testdb TO admin;
+2017-11-26 10:26:44.502 IST [11484] ERROR:  column "t" does not exist at character 32
+2017-11-26 10:26:44.502 IST [11484] STATEMENT:  update pg_user set usecreatedb=t where usename='admin';
+2017-11-26 10:26:50.390 IST [11484] ERROR:  cannot update view "pg_shadow"
+2017-11-26 10:26:50.390 IST [11484] DETAIL:  Views that do not select from a single table or view are not automatically updatable.
+2017-11-26 10:26:50.390 IST [11484] HINT:  To enable updating the view, provide an INSTEAD OF UPDATE trigger or an unconditional ON UPDATE DO INSTEAD rule.
+2017-11-26 10:26:50.390 IST [11484] STATEMENT:  update pg_user set usecreatedb=true where usename='admin';
+2017-11-26 10:27:31.249 IST [11484] ERROR:  syntax error at or near "clear" at character 1
+2017-11-26 10:27:31.249 IST [11484] STATEMENT:  clear
+	GRANT ALL PRIVILEGES ON DATABASE testdb TO admin;
+2017-11-26 10:27:44.978 IST [11484] ERROR:  syntax error at or near "clear" at character 1
+2017-11-26 10:27:44.978 IST [11484] STATEMENT:  clear
+	;
+2017-11-26 10:28:24.367 IST [21443] ERROR:  permission denied to create database
+2017-11-26 10:28:24.367 IST [21443] STATEMENT:  create database bosdb;
+2017-11-26 10:29:19.028 IST [21443] ERROR:  role "postgres" does not exist
+2017-11-26 10:29:19.028 IST [21443] STATEMENT:  ALTER USER postgres PASSWORD 'md532e12f215ba27cb750c9e093ce4b5127'
+2017-11-26 10:50:59.261 IST [34366] FATAL:  database "admin" does not exist
+2017-12-01 10:24:11.820 IST [8942] FATAL:  database "manpreetsingh" does not exist
+2017-12-01 10:24:16.956 IST [8952] FATAL:  database "admin" does not exist
+2017-12-01 10:24:22.319 IST [9049] FATAL:  role "manpreet" does not exist
+2017-12-01 10:26:05.656 IST [10122] FATAL:  database "manpreetsingh" does not exist
+2017-12-01 10:26:51.472 IST [10511] FATAL:  database "bname" does not exist
+2017-12-01 10:28:29.373 IST [11372] FATAL:  role "pgadmin" does not exist
+2017-12-01 10:31:53.606 IST [12620] ERROR:  syntax error at or near "ls" at character 1
+2017-12-01 10:31:53.606 IST [12620] STATEMENT:  ls
+	/ld
+	SELECT current_database();
+2017-12-02 22:43:03.216 IST [95721] FATAL:  database "admin" does not exist
+2017-12-02 22:51:49.375 IST [95819] ERROR:  syntax error at or near "'admin'" at character 12
+2017-12-02 22:51:49.375 IST [95819] STATEMENT:  ALTER USER 'admin' WITH PASSWORD 'password';
+2017-12-02 22:52:03.344 IST [868] FATAL:  role "postgres" does not exist
+2017-12-02 22:58:41.044 IST [4506] FATAL:  role "postgres" does not exist
+2017-12-02 22:58:48.882 IST [4601] ERROR:  syntax error at or near "'admin'" at character 12
+2017-12-02 22:58:48.882 IST [4601] STATEMENT:  ALTER USER 'admin' WITH PASSWORD 'password';
+2017-12-02 22:58:58.283 IST [4601] ERROR:  syntax error at or near "'admin'" at character 12
+2017-12-02 22:58:58.283 IST [4601] STATEMENT:  ALTER USER 'admin' WITH PASSWORD 'password';
+2017-12-02 22:59:10.773 IST [4601] ERROR:  relation "role" does not exist at character 15
+2017-12-02 22:59:10.773 IST [4601] STATEMENT:  select * from role;
+2017-12-02 22:59:13.144 IST [4601] ERROR:  relation "user_role" does not exist at character 15
+2017-12-02 22:59:13.144 IST [4601] STATEMENT:  select * from user_role;
+2017-12-02 22:59:17.027 IST [4601] ERROR:  relation "userrole" does not exist at character 15
+2017-12-02 22:59:17.027 IST [4601] STATEMENT:  select * from userRole;
+2017-12-02 23:08:10.210 IST [4601] ERROR:  syntax error at or near "pg_user" at character 7
+2017-12-02 23:08:10.210 IST [4601] STATEMENT:  ALTER pg_user where usename 'admin' password 'password';
+2017-12-02 23:38:07.964 IST [26226] FATAL:  role "postgres" does not exist
+2017-12-03 15:23:53.302 IST [7560] ERROR:  null value in column "created_by_id" violates not-null constraint
+2017-12-03 15:23:53.302 IST [7560] DETAIL:  Failing row contains (1, some data, null).
+2017-12-03 15:23:53.302 IST [7560] STATEMENT:  INSERT INTO "posts_post" ("created_by_id", "data") VALUES (NULL, 'some data') RETURNING "posts_post"."id"
+2017-12-03 15:25:01.582 IST [8828] ERROR:  relation "posts" does not exist at character 15
+2017-12-03 15:25:01.582 IST [8828] STATEMENT:  select * from posts;
+2017-12-03 15:25:26.181 IST [8828] ERROR:  syntax error at or near "/" at character 1
+2017-12-03 15:25:26.181 IST [8828] STATEMENT:  /c hoopoe
+	select * from hoopeuser
+	;
+2017-12-03 15:25:34.437 IST [8828] ERROR:  relation "hoopeuser" does not exist at character 15
+2017-12-03 15:25:34.437 IST [8828] STATEMENT:  select * from hoopeuser;
+2017-12-03 15:25:38.478 IST [8828] ERROR:  relation "hoope_user" does not exist at character 15
+2017-12-03 15:25:38.478 IST [8828] STATEMENT:  select * from hoope_user;
+2017-12-03 15:26:44.113 IST [9635] ERROR:  syntax error at or near "/" at character 1
+2017-12-03 15:26:44.113 IST [9635] STATEMENT:  /ld
+	select * from posts_post;
+2017-12-03 19:59:56.811 IST [6075] LOG:  received SIGHUP, reloading configuration files
