@@ -47,16 +47,20 @@ class UserProfile(models.Model):
     """
     Defines the user-profile
     """
+    ADMIN = '1'
+    CO_ADMIN = '2'
+    VOLUNTEER = '3'
+    PARTICIPANT = '4'
 
     PROFILE_CHOICES = (
-        (1, 'Admin'),
-        (2, 'Co-admin'),
-        (3, 'Volunteer'),
-        (4, 'Participant'),
+        (ADMIN, 'Admin'),
+        (CO_ADMIN, 'Co-admin'),
+        (VOLUNTEER, 'Volunteer'),
+        (PARTICIPANT, 'Participant'),
     )
 
     profile = models.CharField(max_length=1, choices=PROFILE_CHOICES)
-    user = models.ForeignKey(User)
+    user = models.OneToOneField(User)
 
     class Meta:
         unique_together = (('user', 'profile'), )

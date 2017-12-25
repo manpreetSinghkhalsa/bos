@@ -25,20 +25,12 @@ class CreateUser(FormView):
 
         form_data = form.cleaned_data
 
-        profile_id = int(form_data.pop('profile'))
-
+        profile_id = form_data.pop('profile')
         user = form.save()
-
         UserProfile.objects.create(**{
             'user': user,
             'profile': profile_id
         })
-        print "**" * 10
-
-
-        # form.save()
-        print form.__dict__
-        print "**" * 10
         return HttpResponseRedirect(self.get_success_url())
 
     def get_context_data(self, **kwargs):
