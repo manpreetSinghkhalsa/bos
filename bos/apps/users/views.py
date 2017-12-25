@@ -10,6 +10,7 @@ from django.views.generic.base import TemplateView
 
 from bos.apps.users.forms import UserForm
 from bos.apps.users.models import UserProfile
+from bos.apps.users.utils import add_user_to_group
 
 
 class CreateUser(FormView):
@@ -26,11 +27,16 @@ class CreateUser(FormView):
         form_data = form.cleaned_data
 
         profile_id = form_data.pop('profile')
+        # Create user
         user = form.save()
+        # Create User Profile
         UserProfile.objects.create(**{
             'user': user,
             'profile': profile_id
         })
+        # Add to the particular group
+        add_user_to_group(user_obj=user, profile_choice=profile_id)
+
         return HttpResponseRedirect(self.get_success_url())
 
     def get_context_data(self, **kwargs):

@@ -59,6 +59,13 @@ class UserProfile(models.Model):
         (PARTICIPANT, 'Participant'),
     )
 
+    PROFILE_GROUP_DICT = {
+        ADMIN: 'admin',
+        CO_ADMIN: 'co-admin',
+        VOLUNTEER: 'volunteer',
+        PARTICIPANT: 'participant'
+    }
+
     profile = models.CharField(max_length=1, choices=PROFILE_CHOICES)
     user = models.OneToOneField(User)
 
