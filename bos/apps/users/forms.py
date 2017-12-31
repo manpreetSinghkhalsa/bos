@@ -1,6 +1,5 @@
 from django import forms
 
-# from bos_management.bos.apps.users.models import User
 from bos.apps.users.models import User, UserProfile
 
 
@@ -8,9 +7,17 @@ PROFILES_WITH_EMPTY_CHOICE = [('', '--------')] + list(UserProfile.PROFILE_CHOIC
 
 
 class UserForm(forms.ModelForm):
-    profile = forms.ChoiceField(choices=PROFILES_WITH_EMPTY_CHOICE, required=True)
+    profile = forms.ChoiceField(choices=PROFILES_WITH_EMPTY_CHOICE)
 
     class Meta:
         model = User
-        # model = models.User
-        fields = ['email', 'username', 'first_name', 'last_name', 'profile']
+        fields = ('email', 'username', 'first_name', 'last_name', 'password', 'profile', )
+
+
+class LoginForm(forms.ModelForm):
+    email = forms.EmailField()
+    password = forms.PasswordInput()
+
+    class Meta:
+        model = User
+        fields = ('email', 'password', )

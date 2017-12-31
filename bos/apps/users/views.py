@@ -1,20 +1,45 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.conf import settings
+from django.contrib.auth import authenticate
 # Create your views here.
+from django.contrib.auth.forms import UserCreationForm
 from django.http.response import HttpResponseRedirect
+from django.urls.base import reverse_lazy
 from django.views.generic import FormView
 
-# from bos.apps.users.forms import UserForm
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView
 
-from bos.apps.users.forms import UserForm
-from bos.apps.users.models import UserProfile
-from bos.apps.users.utils import add_user_to_group
+from bos.apps.users.forms import UserForm, LoginForm
+from bos.apps.users.models import UserProfile, User
+from bos.apps.users.utils import add_user_to_group, generate_hash, get_profile, generate_permission_dict
+
+
+class Login(FormView):
+    form_class = LoginForm
+    success_url = "/create/"
+    template_name = "login.html"
+
+    def form_valid(self, form):
+        """
+        Once the
+        :param form:
+        :return:
+        """
+        print "************"
+        data = form.cleaned_data
+
+        user = authenticate(email=data.get('email'), password=data.get('password'))
+        if user:
+            # do something
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            raise ValueError('Email and password did not match.')
 
 
 class CreateUser(FormView):
-    # context_object_name = 'profiles'
     form_class = UserForm
     success_url = "/"
     template_name = 'edit_user.html'
@@ -45,5 +70,17 @@ class CreateUser(FormView):
         return context
 
 
-class Faltu(TemplateView):
-    template_name = 'success.html'
+class SignUp(CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'signup.html'
+
+
+class Dashboard(TemplateView):
+    template_name = 'common/dashboard.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(Dashboard, self).get_context_data(**kwargs)
+        user_profile = get_profile(self.request.user)
+        # print
+        return generate_permission_dict(context, user_profile)

@@ -1,28 +1,20 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import hashlib
+
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User as django_user
 from django.utils.translation import ugettext_lazy as _
 
 
-class User(django_user, models.Model):
-    # phone_number = models.CharField(max_length=10, unique=True)
-    # # TODO: Need to take a decision on this.
-    # # username = models.CharField(
-    # #     _('username'),
-    # #     max_length=150,
-    # #     help_text=_('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
-    # #     validators=[django_user.username_validator],
-    # #     error_messages={
-    # #         'unique': _("A user with that username already exists."),
-    # #     }
-    # # )
-    # email = models.EmailField(_('email address'), unique=True)
-    # django_user.first_name = models.CharField(_('first name'), max_length=100)
-    # last_name = models.CharField(_('last name'), max_length=300)
+class User(django_user):
 
-    REQUIRED_FIELDS = ['email', 'username', 'first_name', 'last_name']
+    django_user.email = models.EmailField(unique=True)
+
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'password']
+    USERNAME_FIELD = 'email'
 
     class Meta:
         permissions = (
@@ -47,23 +39,19 @@ class UserProfile(models.Model):
     """
     Defines the user-profile
     """
-    ADMIN = '1'
-    CO_ADMIN = '2'
-    VOLUNTEER = '3'
-    PARTICIPANT = '4'
 
     PROFILE_CHOICES = (
-        (ADMIN, 'Admin'),
-        (CO_ADMIN, 'Co-admin'),
-        (VOLUNTEER, 'Volunteer'),
-        (PARTICIPANT, 'Participant'),
+        (settings.ADMIN, 'Admin'),
+        (settings.CO_ADMIN, 'Co-admin'),
+        (settings.VOLUNTEER, 'Volunteer'),
+        (settings.PARTICIPANT, 'Participant'),
     )
 
     PROFILE_GROUP_DICT = {
-        ADMIN: 'admin',
-        CO_ADMIN: 'co-admin',
-        VOLUNTEER: 'volunteer',
-        PARTICIPANT: 'participant'
+        settings.ADMIN: 'admin',
+        settings.CO_ADMIN: 'co-admin',
+        settings.VOLUNTEER: 'volunteer',
+        settings.PARTICIPANT: 'participant'
     }
 
     profile = models.CharField(max_length=1, choices=PROFILE_CHOICES)

@@ -61,11 +61,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'bos.urls'
 
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            'bos/templates'
+            TEMPLATE_DIR
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -122,3 +124,18 @@ STATIC_ROOT = BASE_DIR + 'statics'
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_REDIRECT_URL = 'user-dashboard'
+
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+# AUTH_USER_MODEL = 'users.user'
+
+# User defined settings
+ADMIN = '1'
+CO_ADMIN = '2'
+VOLUNTEER = '3'
+PARTICIPANT = '4'

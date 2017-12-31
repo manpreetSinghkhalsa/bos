@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block content %}
+    hello ji
+    {% if role.admin %}
+        <button> Admin button </button>
+    {% elif role.co_admin %}
+        <button> Co Admin button </button>
+    {% elif role.volunteer %}
+        <button> Volunteer button </button>
+    {% elif role.participant %}
+        <button> Participant button </button>
+    {% endif %}
+{% endblock %}
