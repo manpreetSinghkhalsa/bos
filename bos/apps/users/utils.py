@@ -31,17 +31,17 @@ def generate_hash(str_data):
     return hashlib.sha256(str_data).hexdigest()
 
 
-def get_profile(user_obj):
+def get_group_name(user_obj):
     """
 
     :param user_obj:
     :return:
     """
     # Only one entry will be in the UserProfile model
-    return UserProfile.objects.filter(user=user_obj).first().profile
+    return list(user_obj.groups.all().values_list('name', flat=True))
 
 
-def generate_permission_dict(main_dict, user_profile):
+def generate_permission_dict(main_dict, user_group_names):
     """
 
     :param main_dict:
@@ -49,9 +49,7 @@ def generate_permission_dict(main_dict, user_profile):
     :return:
     """
     main_dict['role'] = {}
-    main_dict['role']['is_admin'] = user_profile == settings.ADMIN
-    main_dict['role']['is_co_admin'] = user_profile == settings.CO_ADMIN
-    main_dict['role']['is_volunteer'] = user_profile == settings.VOLUNTEER
-    main_dict['role']['is_participant'] = user_profile == settings.PARTICIPANT
+    for group_name in user_group_names:
+        main_dict['role'][group_name] = True
 
     return main_dict

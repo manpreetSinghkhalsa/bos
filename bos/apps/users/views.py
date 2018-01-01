@@ -14,7 +14,7 @@ from django.views.generic.edit import CreateView
 
 from bos.apps.users.forms import UserForm, LoginForm
 from bos.apps.users.models import UserProfile, User
-from bos.apps.users.utils import add_user_to_group, generate_hash, get_profile, generate_permission_dict
+from bos.apps.users.utils import add_user_to_group, generate_hash, get_group_name, generate_permission_dict
 
 
 class Login(FormView):
@@ -52,8 +52,16 @@ class CreateUser(FormView):
         form_data = form.cleaned_data
 
         profile_id = form_data.pop('profile')
+        # password = form_data.pop('password')
+
+        print "apne form data: ", form_data, ' <<<<<'
+        # print 'password assa da: ', password, ' <<<<'
+        # obj = User(password=set_password(password))
+        # form_data['password'] = User.set_password(password)
         # Create user
-        user = form.save()
+        user = User.objects.create(**form_data)
+
+        print ">>>  bann gya user <<<<"
         # Create User Profile
         UserProfile.objects.create(**{
             'user': user,
@@ -81,6 +89,7 @@ class Dashboard(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(Dashboard, self).get_context_data(**kwargs)
-        user_profile = get_profile(self.request.user)
-        # print
-        return generate_permission_dict(context, user_profile)
+        user_group_names = get_group_name(self.request.user)
+        print 'all group names: ', user_group_names, '  <<<<< user: ', self.request.user, ' <<<<'
+        print generate_permission_dict(context, user_group_names), ' <<<<'
+        return generate_permission_dict(context, user_group_names)

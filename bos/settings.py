@@ -132,10 +132,15 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-# AUTH_USER_MODEL = 'users.user'
+AUTH_USER_MODEL = 'users.user'
 
 # User defined settings
 ADMIN = '1'
 CO_ADMIN = '2'
 VOLUNTEER = '3'
 PARTICIPANT = '4'
+
+ADMIN_GROUP_NAME = 'admin'
+CO_ADMIN_GROUP_NAME = 'co_admin'
+VOLUNTEER_GROUP_NAME = 'volunteer'
+PARTICIPANT_GROUP_NAME = 'participant'
